@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="movie"
+            type="com.example.android.moviereviews.network.Movie" />
+        <variable
+            name="clickListener"
+            type="com.example.android.moviereviews.screens.overview.MovieListener" />
+    </data>
+
+    <FrameLayout
+        orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(movie)}">
+
+        <ImageView
+            android:id="@+id/movie_image"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:adjustViewBounds="true"
+            android:padding="2dp"
+            android:scaleType="fitXY"
+            app:imageUrl="@{movie.multimedia.imgSrcUrl}"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/teal_200"
+            android:layout_margin="2dp"
+            android:padding="2dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@{movie.displayTitle}"
+            tools:text="text description" />
+    </FrameLayout>
+
+</layout>
