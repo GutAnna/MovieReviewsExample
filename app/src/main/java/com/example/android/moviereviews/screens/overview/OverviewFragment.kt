@@ -24,13 +24,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.moviereviews.R
 import com.example.android.moviereviews.databinding.FragmentOverviewBinding
 
 class OverviewFragment : Fragment() {
     lateinit var binding: FragmentOverviewBinding
-    private val viewModel: OverviewViewModel by viewModels()
+
+    private val viewModel: OverviewViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        ViewModelProvider(
+            this,
+            OverviewViewModel.Factory(activity.application)
+        )[OverviewViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
