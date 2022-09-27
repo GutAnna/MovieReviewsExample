@@ -21,5 +21,8 @@
         <argument
             android:name="url"
             app:argType="string" />
+        <argument
+            android:name="internetAvailable"
+            app:argType="boolean" />
     </fragment>
 </navigation>
