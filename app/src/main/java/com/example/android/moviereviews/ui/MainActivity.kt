@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.moviereviews
+package com.example.android.moviereviews.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +22,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.android.moviereviews.R
 import com.example.android.moviereviews.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

@@ -1,9 +1,7 @@
 package com.example.android.moviereviews.network
 
 import com.example.android.moviereviews.database.DatabaseMovies
-import com.example.android.moviereviews.domain.Movie
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 const val apiKey = "XATOxt0y6FMjPGBu7sdO0G6XKPkBSOcp"
 
@@ -32,17 +30,6 @@ data class Link(
     @Json val url: String,
 )
 
-
-fun MoviesResponse.asDomainModel(): List<Movie> {
-    return movies.map {
-        Movie(
-            displayTitle =  it.displayTitle,
-            summaryShort = it.summaryShort,
-            url = it.link?.url ?: "",
-            imgSrcUrl = it.multimedia.imgSrcUrl
-           )
-    }
-}
 
 fun MoviesResponse.asDatabaseModel(): List<DatabaseMovies> {
     return movies.map {

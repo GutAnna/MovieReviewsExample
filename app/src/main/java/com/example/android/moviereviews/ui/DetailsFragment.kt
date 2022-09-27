@@ -1,4 +1,4 @@
-package com.example.android.moviereviews.screens.details
+package com.example.android.moviereviews.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

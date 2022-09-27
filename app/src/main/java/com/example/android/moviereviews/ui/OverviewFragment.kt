@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.moviereviews.screens.overview
+package com.example.android.moviereviews.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,12 +22,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.moviereviews.R
 import com.example.android.moviereviews.databinding.FragmentOverviewBinding
+import com.example.android.moviereviews.screens.overview.MovieGridAdapter
+import com.example.android.moviereviews.screens.overview.MovieListener
+import com.example.android.moviereviews.screens.overview.OverviewViewModel
 
 class OverviewFragment : Fragment() {
     lateinit var binding: FragmentOverviewBinding
