@@ -16,43 +16,40 @@
 
 package com.example.android.moviereviews.screens.overview
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.android.moviereviews.network.Api
-import com.example.android.moviereviews.network.Movie
+import android.app.Application
+import androidx.lifecycle.*
+import com.example.android.moviereviews.database.getDatabase
+import com.example.android.moviereviews.repository.MovieRepository
 import kotlinx.coroutines.launch
 
 enum class ApiStatus { LOADING, ERROR, DONE }
-const val apiKey = "XATOxt0y6FMjPGBu7sdO0G6XKPkBSOcp"
 
-class OverviewViewModel : ViewModel() {
+
+class OverviewViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val movieRepository = MovieRepository(getDatabase(application))
+    val movielist = movieRepository.movies
 
     private val _status = MutableLiveData<ApiStatus>()
     val status: LiveData<ApiStatus> = _status
-
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>> = _movies
 
     private val _navigateToDetail = MutableLiveData<String>()
     val navigateToDetail
         get() = _navigateToDetail
 
     init {
-        getMovies()
+        refreshDataFromRepository()
     }
 
-    private fun getMovies() {
+    private fun refreshDataFromRepository() {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
-                val response = Api.retrofitService.getResponse(apiKey)
-                _movies.value = response.movies!!
+                movieRepository.refreshMovies()
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
+                if(movielist.value.isNullOrEmpty())
                 _status.value = ApiStatus.ERROR
-                _movies.value = listOf()
             }
         }
     }
@@ -62,5 +59,15 @@ class OverviewViewModel : ViewModel() {
 
     fun onMovieDetailNavigated() {
         _navigateToDetail.value = null
+    }
+
+    class Factory(val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(OverviewViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return OverviewViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
     }
 }

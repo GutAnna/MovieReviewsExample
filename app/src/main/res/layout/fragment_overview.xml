@@ -20,7 +20,7 @@
             android:layout_height="0dp"
             android:padding="6dp"
             android:clipToPadding="false"
-            app:listData="@{viewModel.movies}"
+            app:listData="@{viewModel.movielist}"
             app:layoutManager=
                 "androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

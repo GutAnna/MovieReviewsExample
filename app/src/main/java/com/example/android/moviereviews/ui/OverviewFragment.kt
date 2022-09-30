@@ -14,23 +14,39 @@
  * limitations under the License.
  */
 
-package com.example.android.moviereviews.screens.overview
+package com.example.android.moviereviews.ui
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.moviereviews.R
 import com.example.android.moviereviews.databinding.FragmentOverviewBinding
+import com.example.android.moviereviews.screens.overview.MovieGridAdapter
+import com.example.android.moviereviews.screens.overview.MovieListener
+import com.example.android.moviereviews.screens.overview.OverviewViewModel
 
 class OverviewFragment : Fragment() {
     lateinit var binding: FragmentOverviewBinding
-    private val viewModel: OverviewViewModel by viewModels()
+
+    private val viewModel: OverviewViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        ViewModelProvider(
+            this,
+            OverviewViewModel.Factory(activity.application)
+        )[OverviewViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,10 +66,25 @@ class OverviewFragment : Fragment() {
             url?.let {
                 this.findNavController().navigate(
                     OverviewFragmentDirections
-                        .actionOverviewFragmentToDetailsFragment(url))
+                        .actionOverviewFragmentToDetailsFragment(
+                            url,
+                            context?.isInternetAvailable() ?: false
+                        )
+                )
                 viewModel.onMovieDetailNavigated()
             }
         })
         return binding.root
+    }
+
+    private fun Context.isInternetAvailable(): Boolean {
+        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
+                val cap = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
+                return cap.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            }
+        else -> return true
+        }
     }
 }

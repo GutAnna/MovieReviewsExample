@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.moviereviews.databinding.GridViewItemBinding
-import com.example.android.moviereviews.network.Movie
+import com.example.android.moviereviews.domain.Movie
 
 class MovieGridAdapter(val clickListener: MovieListener) : ListAdapter<Movie,
         MovieGridAdapter.MovieViewHolder>(DiffCallback) {
@@ -33,11 +33,11 @@ class MovieGridAdapter(val clickListener: MovieListener) : ListAdapter<Movie,
         }
 
         override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem.multimedia?.imgSrcUrl == newItem.multimedia?.imgSrcUrl
+            return oldItem.imgSrcUrl == newItem.imgSrcUrl
         }
     }
 }
 
 class MovieListener(val clickListener: (url: String) -> Unit) {
-    fun onClick(movie: Movie) = clickListener(movie.link!!.url)
+    fun onClick(movie: Movie) = clickListener(movie.url)
 }

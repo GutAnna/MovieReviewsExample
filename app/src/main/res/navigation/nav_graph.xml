@@ -6,7 +6,7 @@
     app:startDestination="@id/overviewFragment">
     <fragment
         android:id="@+id/overviewFragment"
-        android:name="com.example.android.moviereviews.screens.overview.OverviewFragment"
+        android:name="com.example.android.moviereviews.ui.OverviewFragment"
         android:label="Movies list"
         tools:layout="@layout/fragment_overview">
         <action
@@ -15,11 +15,14 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.android.moviereviews.screens.details.DetailsFragment"
+        android:name="com.example.android.moviereviews.ui.DetailsFragment"
         android:label="Movie review"
         tools:layout="@layout/fragment_details">
         <argument
             android:name="url"
             app:argType="string" />
+        <argument
+            android:name="internetAvailable"
+            app:argType="boolean" />
     </fragment>
 </navigation>
