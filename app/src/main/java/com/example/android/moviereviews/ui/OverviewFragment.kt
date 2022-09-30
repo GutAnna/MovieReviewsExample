@@ -77,27 +77,14 @@ class OverviewFragment : Fragment() {
         return binding.root
     }
 
-    fun Context.isInternetAvailable(): Boolean {
+    private fun Context.isInternetAvailable(): Boolean {
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
                 val cap = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
                 return cap.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
             }
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> {
-                val networks = cm.allNetworks
-                for (n in networks) {
-                    val nInfo = cm.getNetworkInfo(n)
-                    if (nInfo != null && nInfo.isConnected) return true
-                }
-            }
-            else -> {
-                val networks = cm.allNetworkInfo
-                for (nInfo in networks) {
-                    if (nInfo != null && nInfo.isConnected) return true
-                }
-            }
+        else -> return true
         }
-        return false
     }
 }
