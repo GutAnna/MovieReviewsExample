@@ -7,7 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.android.moviereviews.domain.Movie
-import com.example.android.moviereviews.screens.overview.ApiStatus
+import com.example.android.moviereviews.viewmodels.ApiStatus
 import com.example.android.moviereviews.screens.overview.MovieGridAdapter
 
 @BindingAdapter("imageUrl")
@@ -30,7 +30,8 @@ fun bindRecyclerView(recyclerView: RecyclerView,
 
 @BindingAdapter("apiStatus")
 fun bindStatus(statusImageView: ImageView,
-               status: ApiStatus) {
+               status: ApiStatus
+) {
     when (status) {
         ApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE

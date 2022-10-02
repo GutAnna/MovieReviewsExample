@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.moviereviews.screens.overview
+package com.example.android.moviereviews.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
