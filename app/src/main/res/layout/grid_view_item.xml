@@ -9,7 +9,7 @@
             type="com.example.android.moviereviews.domain.Movie" />
         <variable
             name="clickListener"
-            type="com.example.android.moviereviews.screens.overview.MovieListener" />
+            type="com.example.android.moviereviews.util.MovieListener" />
     </data>
 
     <FrameLayout

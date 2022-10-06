@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.android.moviereviews.domain.Movie
 import com.example.android.moviereviews.viewmodels.ApiStatus
-import com.example.android.moviereviews.screens.overview.MovieGridAdapter
+import com.example.android.moviereviews.util.MovieGridAdapter
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {

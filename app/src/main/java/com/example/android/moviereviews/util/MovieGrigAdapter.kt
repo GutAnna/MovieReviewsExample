@@ -1,4 +1,4 @@
-package com.example.android.moviereviews.screens.overview
+package com.example.android.moviereviews.util
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

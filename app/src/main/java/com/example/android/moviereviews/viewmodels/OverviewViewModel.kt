@@ -48,11 +48,12 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
                 movieRepository.refreshMovies()
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
-                if(movielist.value.isNullOrEmpty())
-                _status.value = ApiStatus.ERROR
+                if (movielist.value.isNullOrEmpty())
+                    _status.value = ApiStatus.ERROR
             }
         }
     }
+
     fun onMovieClicked(url: String) {
         _navigateToDetail.value = url
     }

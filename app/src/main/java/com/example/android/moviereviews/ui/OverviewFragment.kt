@@ -31,8 +31,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.moviereviews.R
 import com.example.android.moviereviews.databinding.FragmentOverviewBinding
-import com.example.android.moviereviews.screens.overview.MovieGridAdapter
-import com.example.android.moviereviews.screens.overview.MovieListener
+import com.example.android.moviereviews.util.MovieGridAdapter
+import com.example.android.moviereviews.util.MovieListener
 import com.example.android.moviereviews.viewmodels.OverviewViewModel
 
 class OverviewFragment : Fragment() {
